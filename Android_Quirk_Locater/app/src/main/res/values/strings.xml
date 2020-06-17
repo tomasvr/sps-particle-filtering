@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Android_Quirk_Locater</string>
+    <string name="tab_text_1">Location Tracker</string>
+    <string name="tab_text_2">Debugging</string>
+    <string name="tab_text_3">Shapes</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fragment_1_standard_text">Main Fragment</string>
+    <string name="fragment_2_standard_text">Debug Fragment</string>
+    <string name="fragment_3_standard_text">New Main Fragment</string>
+
+    <!-- Strings for the different room: -->
+    <string name="cell_0">Kitchen</string>
+    <string name="cell_1">Room 1</string>
+    <string name="cell_2">Room 2</string>
+    <string name="cell_3">Room 3</string>
+    <string name="cell_4">Garden 1</string>
+    <string name="cell_5">Garden 2</string>
+    <string name="cell_6">Garden 3</string>
+    <string name="cell_7">Garden 4</string>
+</resources>

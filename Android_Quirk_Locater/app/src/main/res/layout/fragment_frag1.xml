@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".frag1">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:gravity="center"
+        android:text="@string/fragment_1_standard_text"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="92dp"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/button_cell_0"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:contentDescription="@string/cell_0"
+            android:text="@string/cell_0"
+            app:backgroundTint="#BD2F45" />
+
+
+        <Button
+            android:id="@+id/button_cell_2"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:contentDescription="@string/cell_2"
+            android:text="@string/cell_2"
+            app:backgroundTint="#BD2F45" />
+
+        <Button
+            android:id="@+id/button_cell_1"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:contentDescription="@string/cell_1"
+            android:text="@string/cell_1"
+            app:backgroundTint="#BD2F45" />
+
+        <Button
+            android:id="@+id/button_cell_3"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:contentDescription="@string/cell_3"
+            android:text="@string/cell_3"
+            app:backgroundTint="#BD2F45" />
+
+        <Button
+            android:id="@+id/button_cell_4"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:contentDescription="@string/cell_4"
+            android:text="@string/cell_4"
+            android:textSize="12sp"
+            app:backgroundTint="#BD2F45" />
+
+        <Button
+            android:id="@+id/button_cell_5"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:contentDescription="@string/cell_5"
+            android:text="@string/cell_5"
+            android:textSize="12sp"
+            app:backgroundTint="#BD2F45" />
+
+        <Button
+            android:id="@+id/button_cell_6"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:contentDescription="@string/cell_6"
+            android:text="@string/cell_6"
+            android:textSize="12sp"
+            app:backgroundTint="#BD2F45" />
+
+        <Button
+            android:id="@+id/button_cell_7"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:contentDescription="@string/cell_7"
+            android:text="@string/cell_7"
+            android:textSize="12sp"
+            app:backgroundTint="#BD2F45" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="87dp">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_train"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_marginEnd="293dp"
+            android:layout_marginRight="293dp"
+            android:layout_marginBottom="91dp"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_popup_sync"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_locate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_marginStart="294dp"
+            android:layout_marginLeft="294dp"
+            android:layout_marginBottom="91dp"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@android:drawable/ic_search_category_default" />
+
+        <Button
+            android:id="@+id/button_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="240dp"
+            android:layout_marginLeft="240dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="240dp"
+            android:layout_marginRight="240dp"
+            android:layout_marginBottom="23dp"
+            android:gravity="center"
+            android:text="Clear Data"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/fab_locate"
+            app:layout_constraintStart_toEndOf="@+id/fab_train"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
