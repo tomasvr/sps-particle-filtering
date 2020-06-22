@@ -511,7 +511,7 @@ public class frag_shapes extends Fragment implements View.OnClickListener, Senso
         }
         float percentage = cellParticleCount[largest] / total * 100;
         rectCells.get(largest).getPaint().setColor(Color.BLUE);
-        textcurrentWinner.setText(String.format("current winner is cell %d with %.2f %%", (largest), percentage));
+        textcurrentWinner.setText(String.format("Current winner is cell %d with %.2f %%", (largest), percentage));
     }
 
     @SuppressLint("DefaultLocale")
