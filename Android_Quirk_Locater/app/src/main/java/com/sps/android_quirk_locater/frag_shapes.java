@@ -58,7 +58,7 @@ public class frag_shapes extends Fragment implements View.OnClickListener, Senso
     }
 
     /* Sensor Variables */
-    private TextView textCurrentHeading, textDistanceSum;
+    private TextView textCurrentHeading, textDistanceSum, textcurrentWinner;
     private SensorManager mSensorManager;
     private Sensor mSensorRotationVector;
     private Sensor mSensorStepCounter;
@@ -77,6 +77,8 @@ public class frag_shapes extends Fragment implements View.OnClickListener, Senso
     private List<Integer[]> neighbors; // Cell neighbors
     private Button iniParticles, moveParticles; // Buttons
     private Canvas canvas; // Canvas to draw in
+
+    private int[] cellParticleCount;
 
     /* System and particles parameters */
     int width, height; // width and height of the screen (resolution)
@@ -215,6 +217,7 @@ public class frag_shapes extends Fragment implements View.OnClickListener, Senso
 
         textCurrentHeading = (TextView) rootView.findViewById(R.id.textCurrentHeading);
         textDistanceSum = (TextView) rootView.findViewById(R.id.textDistanceSum);
+        textcurrentWinner = (TextView) rootView.findViewById(R.id.textCurrentWinner);
 
         return rootView;
     }
@@ -313,6 +316,9 @@ public class frag_shapes extends Fragment implements View.OnClickListener, Senso
         boolean legalMoveFlag = false;
         boolean particleContains = false;
 
+        // reset cell particle count
+        cellParticleCount = new int[numCells];
+        Arrays.fill(cellParticleCount, 0);
         // Go through each particle and determine the state (legal/illegal)
         Iterator<particleInfo> particle = particles.iterator();
         while(particle.hasNext()) {
@@ -323,7 +329,6 @@ public class frag_shapes extends Fragment implements View.OnClickListener, Senso
 
             for (ShapeDrawable cells : rectCells) {
                 Rect firstRect = new Rect(cells.getBounds());
-
                 if (firstRect.contains(p.getShape().getBounds()) || firstRect.intersect(p.getShape().getBounds())) {
                     particleContains = true;
                     //Log.d("Cell", "Inside the cell");
@@ -340,8 +345,9 @@ public class frag_shapes extends Fragment implements View.OnClickListener, Senso
                 for (int i = 0; i < oldCells.size(); i++) {
                     if (legalMoveFlag) break;
                     for (int j = 0; j < newCells.size(); j++) {
-                        if (oldCells.get(i) == newCells.get(j) || neighborCells(oldCells.get(i), newCells.get(j))) {
+                        if (oldCells.get(i).equals(newCells.get(j)) || neighborCells(oldCells.get(i), newCells.get(j))) {
                             // No illegal jumps or wall collision
+                            cellParticleCount[newCells.get(j)] += 1;
                             legalMoveFlag = true;
                             p.setCell(newCells); // Update the new cell for the next movement
                             //Log.d("Neighbor Cells", "Valid jump");
@@ -493,6 +499,22 @@ public class frag_shapes extends Fragment implements View.OnClickListener, Senso
     }
 
     @SuppressLint("DefaultLocale")
+    public void updateParticleCount() {
+        float total = 0;
+        int largest = 0;
+        for (int i = 0; i < numCells; i++) {
+            rectCells.get(i).getPaint().setColor(Color.YELLOW);
+            total += cellParticleCount[i];
+            if (cellParticleCount[i] > cellParticleCount[largest]) {
+                largest = i;
+            }
+        }
+        float percentage = cellParticleCount[largest] / total * 100;
+        rectCells.get(largest).getPaint().setColor(Color.BLUE);
+        textcurrentWinner.setText(String.format("current winner is cell %d with %.2f %%", (largest), percentage));
+    }
+
+    @SuppressLint("DefaultLocale")
     @Override
     public void onSensorChanged(SensorEvent event) {
         /* If step counter has recorded steps, process them */
@@ -512,6 +534,7 @@ public class frag_shapes extends Fragment implements View.OnClickListener, Senso
             moveParticles(currentHeading, distance);
             checkOutliers();
             refreshCanvas();
+            updateParticleCount();
             return;
         }
         if (event.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR) {
