@@ -418,34 +418,34 @@ public class frag_shapes extends Fragment implements View.OnClickListener, Senso
      * @param step steps down [unit] ~ (pixels/m) scaling factor
      */
     public void moveParticles(double rotation, double step) {
+        rotation = Math.toDegrees(rotation);
         double radians;
         // translate direction to movement
         if (rotation < 92 && rotation > 0) {
-            // North
+            // North,
             radians = Math.PI;
         }
         else if (rotation <= 0 && rotation > -120) {
             // East
-            radians = Math.PI * 2;
+            radians = Math.PI * 0.5;
         }
-        else if (rotation < -120 && rotation >= -180) {
+        else if ( (rotation < -120 && rotation >= -180) || (rotation <= 180 && rotation > 160) ) {
             // South
             radians = 0;
         }
+        //else if (rotation < 180 && rotation >= 92 ) {
         else {
-            // West
-            radians = Math.PI * 1.5;
+            radians = Math.PI * -0.5;
         }
 
         step = step * walkStep * scaleFactor;
-
         Iterator<particleInfo> particle = particles.iterator();
         while(particle.hasNext()) {
             particleInfo p = particle.next();
             Rect particleDimensions = p.getShape().getBounds();
 
-            p.getShape().setBounds((int) (particleDimensions.left+Math.sin(radians)*step), (int) (particleDimensions.top+Math.cos(radians)*step),
-                    (int) (particleDimensions.right+Math.sin(radians)*step), (int) (particleDimensions.bottom+Math.cos(radians)*step));
+            p.getShape().setBounds((int) (particleDimensions.left + Math.sin(radians)*step ), (int) (particleDimensions.top + Math.cos(radians)*step),
+                    (int) (particleDimensions.right+ Math.sin(radians)*step ), (int) (particleDimensions.bottom + Math.cos(radians)*step ));
         }
     }
 
@@ -543,12 +543,19 @@ public class frag_shapes extends Fragment implements View.OnClickListener, Senso
             float z =  event.values[2];
             float w =  event.values[3];
 
+            // alternative calculation
+//            double mag = Math.sqrt(w*w +z*z);
+//            w /= mag;
+//            z /= mag;
+//            currentHeading = 2*Math.acos(w);
+
             // Calculate yaw rotation of the phone to estimate heading direction
             double siny_cosp = 2.0 * (w * z + x * y);
             double cosy_cosp = 1.0 - 2.0 * (y * y + z * z);
-            double heading = Math.atan2(siny_cosp, cosy_cosp);
-            currentHeading = heading;
-            textCurrentHeading.setText(String.format(" Yaw: %.3f", Math.toDegrees(heading)));
+            currentHeading = Math.atan2(siny_cosp, cosy_cosp);
+            //textCurrentHeading.setText(String.format(" Yaw: %.3f", Math.toDegrees(heading)));
+            textCurrentHeading.setText(String.format(" Yaw: %.3f", currentHeading));
+
         }
     }
 
