@@ -421,15 +421,15 @@ public class frag_shapes extends Fragment implements View.OnClickListener, Senso
         rotation = Math.toDegrees(rotation);
         double radians;
         // translate direction to movement
-        if (rotation < 92 && rotation > 0) {
+        if ( (rotation < 70 && rotation > 0) || (rotation <= 0 && rotation < -20) ){
             // North,
             radians = Math.PI;
         }
-        else if (rotation <= 0 && rotation > -120) {
+        else if (rotation <= -20 && rotation > -110) {
             // East
             radians = Math.PI * 0.5;
         }
-        else if ( (rotation < -120 && rotation >= -180) || (rotation <= 180 && rotation > 160) ) {
+        else if ( (rotation < -110 && rotation >= -180) ) {
             // South
             radians = 0;
         }
@@ -549,12 +549,16 @@ public class frag_shapes extends Fragment implements View.OnClickListener, Senso
 //            z /= mag;
 //            currentHeading = 2*Math.acos(w);
 
+            // alt calc 2
+            currentHeading= Math.atan2(2.0*(x*y + w*z), w*w + x*x - y*y - z*z);
+
             // Calculate yaw rotation of the phone to estimate heading direction
-            double siny_cosp = 2.0 * (w * z + x * y);
-            double cosy_cosp = 1.0 - 2.0 * (y * y + z * z);
-            currentHeading = Math.atan2(siny_cosp, cosy_cosp);
-            //textCurrentHeading.setText(String.format(" Yaw: %.3f", Math.toDegrees(heading)));
-            textCurrentHeading.setText(String.format(" Yaw: %.3f", currentHeading));
+//            double siny_cosp = 2.0 * (w * z + x * y);
+//            double cosy_cosp = 1.0 - 2.0 * (y * y + z * z);
+//            currentHeading = Math.atan2(siny_cosp, cosy_cosp);
+            textCurrentHeading.setText(String.format(" Yaw: %.3f", Math.toDegrees(currentHeading)));
+            //textCurrentHeading.setText(String.format(" Yaw: %.3f", currentHeading));
+
 
         }
     }
