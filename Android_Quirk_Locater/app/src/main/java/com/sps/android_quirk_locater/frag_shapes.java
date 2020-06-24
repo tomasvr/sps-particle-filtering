@@ -421,11 +421,11 @@ public class frag_shapes extends Fragment implements View.OnClickListener, Senso
         rotation = Math.toDegrees(rotation);
         double radians;
         // translate direction to movement
-        if ( (rotation < 70 && rotation > 0) || (rotation <= 0 && rotation < -20) ){
+        if ( (rotation < 70 && rotation > 0) || (rotation <= 0 && rotation > -20) ){
             // North,
             radians = Math.PI;
         }
-        else if (rotation <= -20 && rotation > -110) {
+        else if (rotation <= -20 && rotation >= -110) {
             // East
             radians = Math.PI * 0.5;
         }
